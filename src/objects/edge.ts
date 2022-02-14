@@ -20,8 +20,11 @@ export class Edge extends Phaser.Curves.CubicBezier{
 	railwayPoints(divisions: number = 99): 
 		Array<[Phaser.Math.Vector2, Phaser.Math.Vector2]>{
 		const points: Array<Phaser.Math.Vector2> = this.getPoints(divisions);
-		return Array(divisions).fill(0).map(
-			(_, i) => [points[i], this.getTangent(i)])
+		return Array(divisions + 1).fill(0).map(
+			(_, i) => {
+				var _t = this.getTangent(i / (divisions + 1));
+				;debugger
+				return [points[i], _t]})
 	}
 
 	_debug(scene: MainScene){
