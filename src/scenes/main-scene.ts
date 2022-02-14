@@ -1,33 +1,46 @@
-import { Redhat } from '../objects/redhat';
+import {Edge} from '../objects/edge'
+import {Node} from '../objects/node'
+import {Point} from '../objects/point'
+import {Railway} from '../objects/railway'
 
 export class MainScene extends Phaser.Scene {
-  private myRedhat: Redhat;
+  // phaser
+  graphics: Phaser.GameObjects.Graphics;
+
+  // trains
+  curve: Edge;
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   preload(): void {
-    this.load.image('redhat', '../assets/redhat.png');
-    this.load.image('redParticle', '../assets/red.png');
+	  this.load.image('railway', '../assets/rail.png');
+	  this.load.image('red', '../assets/red.png');
+	  this.load.image('green', '../assets/green.png');
+	  this.load.image('blue', '../assets/blue.png');
   }
 
   create(): void {
-    const particles = this.add.particles('redParticle');
+	  this.graphics = new Phaser.GameObjects.Graphics(this);
+	  this.curve = new Edge({
+		  startNode: new Node(),
+		  firstControlPoint: new Point(),
+		  secondControlPoint: new Point(),
+		  endNode: new Node()
+	  });
+	  this.curve.railwayPoints(5).forEach(
+		  ([point, tangent]) => {
+			  new Railway({
+				  scene: this, 
+				  x: point.x, 
+				  y: point.y,
+				  rotation: Phaser.Math.Angle.Between(point.x, point.y, tangent.x, tangent.y)
+			  })
+		  });
+	  this.curve._debug(this);
+  }
 
-    const emitter = particles.createEmitter({
-      speed: 100,
-      scale: { start: 0.5, end: 0 },
-      blendMode: 'ADD'
-    });
-
-    this.myRedhat = new Redhat({
-      scene: this,
-      x: 400,
-      y: 300,
-      texture: 'redhat'
-    });
-
-    emitter.startFollow(this.myRedhat);
+  update(): void{
   }
 }
