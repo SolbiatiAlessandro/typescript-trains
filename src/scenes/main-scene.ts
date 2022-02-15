@@ -10,6 +10,7 @@ import {RailwayBuilder} from '../builders/railway-builder'
 export class MainScene extends Phaser.Scene {
 
   railwayBuilder: RailwayBuilder;
+  graph: Graph;
 
   constructor() {
     super({ key: 'MainScene' });
@@ -18,6 +19,8 @@ export class MainScene extends Phaser.Scene {
   create(): void {
 	  this.railwayBuilder = new RailwayBuilder(this);
 	  this.railwayBuilder.createRailway();
+
+	  this.graph = new Graph();
 
 	  this._inputs();
   }
