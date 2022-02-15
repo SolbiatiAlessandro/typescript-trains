@@ -5,6 +5,10 @@
     "moduleResolution": "node",
     "noImplicitAny": true
   },
+  "typeRoots": [
+			"node_modules/@types",
+			"node_module/phaser/types"
+		],
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }
