@@ -9,20 +9,42 @@ import {GraphBuilder} from '../builders/graph-builder'
 export class MainScene extends Phaser.Scene {
 
   railwayBuilder: RailwayBuilder;
-  graphBuilder: GraphBuilder = new GraphBuilder();
+  graphBuilder: GraphBuilder;
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create(): void {
-	  this.graphBuilder.addNode('1', new Node(50, 200));
-	  this.graphBuilder.addNode('2', new Node(400, 200));
 	  this.railwayBuilder = new RailwayBuilder(this);
+	  this.graphBuilder = new GraphBuilder(this);
+
+	  this.graphBuilder.createNode( 50, 200, '1');
+	  this.graphBuilder.createNode( 400, 200, '2');
 	  this.railwayBuilder.createRailway(
 		  this.graphBuilder.getNode('1'),
 		  this.graphBuilder.getNode('2'),
 	  );
+	  this.graphBuilder.createNode( 900, 400, '3');
+	  this.railwayBuilder.createRailway(
+		  this.graphBuilder.getNode('2'),
+		  this.graphBuilder.getNode('3'),
+	  );
+	  this.graphBuilder.createNode( 800, 100, '4');
+	  this.railwayBuilder.createRailway(
+		  this.graphBuilder.getNode('2'),
+		  this.graphBuilder.getNode('4'),
+	  );
+	  /*
+	  this.railwayBuilder.createRailway(
+		  this.graphBuilder.getNode('4'),
+		  this.graphBuilder.getNode('1'),
+	  );
+	  this.railwayBuilder.createRailway(
+		  this.graphBuilder.getNode('3'),
+		  this.graphBuilder.getNode('1'),
+	  );
+	  */
 
 	  this._inputs();
   }

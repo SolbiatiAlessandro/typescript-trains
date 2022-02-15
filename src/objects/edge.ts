@@ -1,21 +1,16 @@
-import {Point} from './point'
-import {IEdgeConstructor} from '../interfaces/IEdgeConstructor.interface'
-import {MainScene} from '../scenes/main-scene'
-import {RailwayBuilder} from '../builders/railway-builder'
+import {Node} from './node'
 
 export class Edge extends Phaser.Curves.CubicBezier{
-	params: IEdgeConstructor;
 	segments: number;
 	private readonly LENGTH_SEGMENT_RATIO: number = 15;
 
-	constructor(params: IEdgeConstructor){
+	constructor(startNode: Node, endNode: Node){
 		super(
-			params.startNode.vector, 
-			params.firstControlPoint._point.vector,
-			params.secondControlPoint._point.vector,
-			params.endNode.vector
+			startNode.vector, 
+			startNode.rightControlPoint._point.vector,
+			endNode.leftControlPoint._point.vector,
+			endNode.vector
 		);
-		this.params = params;
 		this.segments = Math.floor(this.getLength() / this.LENGTH_SEGMENT_RATIO);
 	}
 
@@ -27,12 +22,5 @@ export class Edge extends Phaser.Curves.CubicBezier{
 			(_, i) => {
 				var _t = this.getTangent(i / (this.segments + 1));
 				return [points[i], _t]})
-	}
-
-	_debug(scene: MainScene){
-		//this.params.startNode.point._debug(scene, "red");
-		this.params.firstControlPoint._point._debug(scene, "green");
-		this.params.secondControlPoint._point._debug(scene, "green");
-		//this.params.endNode.point._debug(scene, "red");
 	}
 }

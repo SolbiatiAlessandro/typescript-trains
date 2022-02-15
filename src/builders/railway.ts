@@ -6,8 +6,6 @@ import {MainScene} from '../scenes/main-scene';
 export class Railway{
 	edge: Edge;
 	rails: Array<Phaser.GameObjects.Sprite> = []; 
-	private readonly controlPointOffsetX = 100;
-	private readonly controlPointOffsetY = -100;
 
 	constructor(
 		public scene: MainScene, 
@@ -15,20 +13,7 @@ export class Railway{
 		startNode: Node,
 		endNode: Node
 	){
-	  this.edge = new Edge({
-		  startNode: startNode,
-		  firstControlPoint: new ControlPoint(
-			  this.scene, 
-			  startNode.x + this.controlPointOffsetX, 
-			  startNode.y + this.controlPointOffsetY
-		  ),
-		  secondControlPoint: new ControlPoint(
-			  this.scene,
-			  endNode.x - this.controlPointOffsetX, 
-			  endNode.y - this.controlPointOffsetY
-		  ),
-		  endNode: endNode,
-	  });
+	  this.edge = new Edge(startNode, endNode);
 	  this.edge.points().forEach(
 		  ([point, tangent], index) => {
 			  const rail = buildingGroup.getFirstDead(true, point.x, point.y, 'rail');
