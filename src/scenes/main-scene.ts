@@ -23,7 +23,7 @@ export class MainScene extends Phaser.Scene {
 
   create(): void {
 	  this.railwayBuilder = new RailwayBuilder(this);
-	  this.railwayBuilder.newRailway();
+	  this.railwayBuilder.createRailway();
 
 	  this.input.on('dragstart', function (pointer: any, gameObject: any) { gameObject.setFrame(1); });
 	  this.input.on('drag', function (pointer: any, gameObject: ControlPoint, dragX: number, dragY: number) {
