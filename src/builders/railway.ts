@@ -1,5 +1,4 @@
 import {Edge} from '../objects/edge';
-import {Point} from '../objects/point';
 import {Node} from '../objects/node';
 import {ControlPoint} from './control-point';
 import {MainScene} from '../scenes/main-scene';
@@ -8,12 +7,17 @@ export class Railway{
 	edge: Edge;
 	rails: Array<Phaser.GameObjects.Sprite> = []; 
 
-	constructor(public scene: MainScene, buildingGroup: Phaser.GameObjects.Group){
+	constructor(
+		public scene: MainScene, 
+		buildingGroup: Phaser.GameObjects.Group,
+		startNode: Node,
+		endNode: Node
+	){
 	  this.edge = new Edge({
-		  startNode: new Node(),
+		  startNode: startNode,
 		  firstControlPoint: new ControlPoint(this.scene),
 		  secondControlPoint: new ControlPoint(this.scene),
-		  endNode: new Node()
+		  endNode: endNode,
 	  });
 	  this.edge.points().forEach(
 		  ([point, tangent], index) => {

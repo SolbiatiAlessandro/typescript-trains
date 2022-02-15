@@ -1,9 +1,6 @@
-import {Edge} from '../objects/edge';
-import {Point} from '../objects/point';
-import {Node} from '../objects/node';
-import {ControlPoint} from './control-point';
 import {MainScene} from '../scenes/main-scene';
 import {Railway} from '../builders/railway'
+import {Node} from '../objects/node'
 
 
 export class RailwayBuilder {
@@ -18,8 +15,13 @@ export class RailwayBuilder {
 	  );
 	};
 
-	createRailway(){
-	  this.railways.push(new Railway(this.scene, this.buildingGroup));
+	createRailway(startNode: Node, endNode: Node){
+	  this.railways.push(new Railway(
+		  this.scene, 
+		  this.buildingGroup,
+		  startNode,
+		  endNode
+	  ));
 	}
 
 	update(){

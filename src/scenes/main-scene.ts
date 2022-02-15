@@ -1,26 +1,28 @@
-import Graph from 'graphology'
-
-//trains
 import {Edge} from '../objects/edge'
 import {Node} from '../objects/node'
 import {Point} from '../objects/point'
+
 import {ControlPoint} from '../builders/control-point'
 import {RailwayBuilder} from '../builders/railway-builder'
+import {GraphBuilder} from '../builders/graph-builder'
 
 export class MainScene extends Phaser.Scene {
 
   railwayBuilder: RailwayBuilder;
-  graph: Graph;
+  graphBuilder: GraphBuilder = new GraphBuilder();
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create(): void {
+	  this.graphBuilder.addNode('1', new Node(50, 200));
+	  this.graphBuilder.addNode('2', new Node(400, 200));
 	  this.railwayBuilder = new RailwayBuilder(this);
-	  this.railwayBuilder.createRailway();
-
-	  this.graph = new Graph();
+	  this.railwayBuilder.createRailway(
+		  this.graphBuilder.getNode('1'),
+		  this.graphBuilder.getNode('2'),
+	  );
 
 	  this._inputs();
   }

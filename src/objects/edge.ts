@@ -8,10 +8,10 @@ export class Edge extends Phaser.Curves.CubicBezier{
 
 	constructor(params: IEdgeConstructor){
 		super(
-			params.startNode.point.vector, 
+			params.startNode.vector, 
 			params.firstControlPoint._point.vector,
 			params.secondControlPoint._point.vector,
-			params.endNode.point.vector
+			params.endNode.vector
 		);
 		this.params = params;
 	}
@@ -27,9 +27,9 @@ export class Edge extends Phaser.Curves.CubicBezier{
 	}
 
 	_debug(scene: MainScene){
-		this.params.startNode.point._debug(scene, "red");
+		//this.params.startNode.point._debug(scene, "red");
 		this.params.firstControlPoint._point._debug(scene, "green");
 		this.params.secondControlPoint._point._debug(scene, "green");
-		this.params.endNode.point._debug(scene, "red");
+		//this.params.endNode.point._debug(scene, "red");
 	}
 }
