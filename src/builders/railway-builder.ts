@@ -23,6 +23,7 @@ export class RailwayBuilder {
 	}
 
 	update(){
+		// later we want to update railways only if it's in selected mode
 		this.railways.forEach(railway => railway.update(this.buildingGroup));
 	}
 }

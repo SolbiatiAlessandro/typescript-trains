@@ -1,3 +1,4 @@
+import { LoadScene } from './scenes/load-scene';
 import { MainScene } from './scenes/main-scene';
 import { Constants } from './constants';
 
@@ -16,7 +17,7 @@ export const GameConfig: Phaser.Types.Core.GameConfig = {
       gravity: { y: 200 }
     }
   },
-  scene: [MainScene],
+  scene: [LoadScene, MainScene],
   scale: {
     parent: 'gamediv',
     autoCenter: Phaser.Scale.CENTER_BOTH,
