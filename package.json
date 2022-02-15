@@ -12,6 +12,7 @@
     "webpack-dev-server": "3.11.2"
   },
   "dependencies": {
+    "graphology": "^0.24.0",
     "phaser": "3.55.2"
   },
   "scripts": {
