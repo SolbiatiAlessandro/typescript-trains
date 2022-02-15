@@ -6,6 +6,8 @@ import {MainScene} from '../scenes/main-scene';
 export class Railway{
 	edge: Edge;
 	rails: Array<Phaser.GameObjects.Sprite> = []; 
+	private readonly controlPointOffsetX = 100;
+	private readonly controlPointOffsetY = -100;
 
 	constructor(
 		public scene: MainScene, 
@@ -15,8 +17,16 @@ export class Railway{
 	){
 	  this.edge = new Edge({
 		  startNode: startNode,
-		  firstControlPoint: new ControlPoint(this.scene),
-		  secondControlPoint: new ControlPoint(this.scene),
+		  firstControlPoint: new ControlPoint(
+			  this.scene, 
+			  startNode.x + this.controlPointOffsetX, 
+			  startNode.y + this.controlPointOffsetY
+		  ),
+		  secondControlPoint: new ControlPoint(
+			  this.scene,
+			  endNode.x - this.controlPointOffsetX, 
+			  endNode.y - this.controlPointOffsetY
+		  ),
 		  endNode: endNode,
 	  });
 	  this.edge.points().forEach(

@@ -5,6 +5,8 @@ import {RailwayBuilder} from '../builders/railway-builder'
 
 export class Edge extends Phaser.Curves.CubicBezier{
 	params: IEdgeConstructor;
+	segments: number;
+	private readonly LENGTH_SEGMENT_RATIO: number = 15;
 
 	constructor(params: IEdgeConstructor){
 		super(
@@ -14,15 +16,16 @@ export class Edge extends Phaser.Curves.CubicBezier{
 			params.endNode.vector
 		);
 		this.params = params;
+		this.segments = Math.floor(this.getLength() / this.LENGTH_SEGMENT_RATIO);
 	}
 
 
-	points(divisions: number = 50): 
+	points(): 
 		Array<[Phaser.Math.Vector2, Phaser.Math.Vector2]>{
-		const points: Array<Phaser.Math.Vector2> = this.getPoints(divisions);
-		return Array(divisions + 1).fill(0).map(
+		const points: Array<Phaser.Math.Vector2> = this.getPoints(this.segments);
+		return Array(this.segments + 1).fill(0).map(
 			(_, i) => {
-				var _t = this.getTangent(i / (divisions + 1));
+				var _t = this.getTangent(i / (this.segments + 1));
 				return [points[i], _t]})
 	}
 
