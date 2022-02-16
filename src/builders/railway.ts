@@ -18,7 +18,6 @@ export class Railway{
 	  this.edge.points().forEach(
 		  ([point, tangent], index) => {
 			  const rail = buildingGroup.getFirstDead(true, point.x, point.y, image);
-			  rail.setDepth(image == 'rail-bottom'? 1 : 2);
 			  rail.rotation = Phaser.Math.Angle.Between(0, 0, tangent.x, tangent.y) + (Phaser.Math.PI2 / 4);
 
 			  rail.displayHeight = 32;

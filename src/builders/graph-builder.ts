@@ -7,8 +7,8 @@ import {ControlPoint} from './control-point';
 export class GraphBuilder {
 	graph: Graph = new Graph();
 	private readonly NODE: string = '_node';
-	private readonly controlPointOffsetX = 100;
-	private readonly controlPointOffsetY = -100;
+	private readonly controlPointOffsetX = 80;
+	private readonly controlPointOffsetY = -80;
 	constructor(public scene: MainScene){}
 	
 	createNode(x: number, y: number, name: string){

@@ -28,7 +28,7 @@ export class RailwayBuilder {
 	  this.railways.push({
 		  bottomRailway: new Railway(
 			  this.scene, 
-			  this.topBuildingGroup,
+			  this.bottomBuildingGroup,
 			  startNode,
 			  endNode,
 			  'rail-bottom'
@@ -45,9 +45,14 @@ export class RailwayBuilder {
 
 	update(){
 		// later we want to update railways only if it's in selected mode
-		this.railways.forEach(irailway => {
-			irailway.bottomRailway.update(this.topBuildingGroup);
-			irailway.topRailway.update(this.bottomBuildingGroup);
-		});
+		let railway_selected = true;
+		if(railway_selected){
+			this.railways.forEach(irailway => {
+				irailway.bottomRailway.update(this.topBuildingGroup);
+				irailway.topRailway.update(this.bottomBuildingGroup);
+			});
+			this.topBuildingGroup.setDepth(2);
+			this.bottomBuildingGroup.setDepth(1);
+		}
 	}
 }
