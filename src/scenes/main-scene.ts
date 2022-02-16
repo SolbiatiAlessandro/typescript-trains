@@ -50,11 +50,8 @@ export class MainScene extends Phaser.Scene {
   }
 
   _inputs(): void{
-	  this.input.on('dragstart', function (pointer: any, gameObject: any) { gameObject.setFrame(1); });
 	  this.input.on('drag', function (pointer: any, gameObject: ControlPoint, dragX: number, dragY: number) {
-		gameObject.x = dragX;
-		gameObject.y = dragY;
-		gameObject.data.get('vector').set(dragX, dragY);
+		  gameObject.onDrag(dragX, dragY);
 	  });
   }
 

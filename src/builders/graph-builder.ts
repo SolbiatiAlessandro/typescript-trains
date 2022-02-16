@@ -12,20 +12,19 @@ export class GraphBuilder {
 	constructor(public scene: MainScene){}
 	
 	createNode(x: number, y: number, name: string){
-		const node = new Node(
-			x,
-			y,
-		    new ControlPoint(
+		const left = new ControlPoint(
 				this.scene, 
 				x - this.controlPointOffsetX, 
 				y - this.controlPointOffsetY
-			),
-		    new ControlPoint(
+			);
+		const right = new ControlPoint(
 				this.scene, 
 				x + this.controlPointOffsetX, 
 				y + this.controlPointOffsetY
-			),
-		);
+			);
+		left.setBrother(right);
+		right.setBrother(left);
+		const node = new Node(x, y, left, right);
 		this._addNode(name, node);
 		return node;
 	}
