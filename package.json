@@ -16,7 +16,8 @@
     "phaser": "3.55.2"
   },
   "scripts": {
-    "dev": "./node_modules/webpack-cli/bin/cli.js --mode development && webpack serve --mode development"
+    "dev": "./node_modules/webpack-cli/bin/cli.js --mode development && webpack serve --mode development",
+    "prod": "./node_modules/webpack-cli/bin/cli.js --mode production"
   },
   "repository": {
     "type": "git",
