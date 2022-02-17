@@ -25,7 +25,7 @@ export class RailwayBuilder {
 	};
 
 	createRailway(startNode: Node, endNode: Node){
-	  this.railways.push({
+	  let railway: IRailway = {
 		  bottomRailway: new Railway(
 			  this.scene, 
 			  this.bottomBuildingGroup,
@@ -40,7 +40,9 @@ export class RailwayBuilder {
 			  endNode,
 			  'rail-top'
 		  )
-	  });
+	  };
+	  this.railways.push(railway); // this will become obsolete pretty soon, you shouldn't use this. Use the edges from the Graph object instead
+	  return railway;
 	}
 
 	update(){
