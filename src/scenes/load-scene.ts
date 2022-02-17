@@ -17,7 +17,8 @@ export class LoadScene extends Phaser.Scene {
 	  this.load.image('blue', '../assets/blue.png');
 	  this.load.image('orange', '../assets/orange.png');
 	  this.load.image('controlPoint', '../assets/controlPoint.png');
-	  this.load.image('train', '../assets/train/0001.png');
+	  this.load.spritesheet('locomotive', '../assets/train/spritesheet.png', { frameWidth: 128, frameHeight: 128 });
+	  this.load.atlas('explosion', 'assets/explosion.png', 'assets/explosion.json');
   }
 
   create(): void {
