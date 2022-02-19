@@ -19,11 +19,13 @@
 
 ## Dev Workflow
 
-Make a new branch the new feature you are building in the ugliest/fastes way possible writing stuff in the main scene without adding files
-Check if what you are seeing is good
-Abandon your branch, check out master
-Rewrite everything in small file <100 lines, functional, typed, and tested
-Make small commits of every change.
+1. Make a new branch the new feature you are building in the ugliest/fastes way possible writing stuff in the main scene without adding files
+2. Check if what you are seeing is good
+3. Abandon your branch, check out master
+4. Rewrite everything in small file <100 lines, functional, typed, and tested
+5. Make small commits of every change.
+
+Stretch: listen to bach while coding
 
 ```
 yarn dev
