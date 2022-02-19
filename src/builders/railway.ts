@@ -11,12 +11,13 @@ export class Railway{
 		public scene: MainScene, 
 		buildingGroup: Phaser.GameObjects.Group,
 		startNode: Node,
-		endNode: Node
+		endNode: Node,
+		image: string
 	){
 	  this.edge = new Edge(startNode, endNode);
 	  this.edge.points().forEach(
 		  ([point, tangent], index) => {
-			  const rail = buildingGroup.getFirstDead(true, point.x, point.y, 'rail');
+			  const rail = buildingGroup.getFirstDead(true, point.x, point.y, image);
 			  rail.rotation = Phaser.Math.Angle.Between(0, 0, tangent.x, tangent.y) + (Phaser.Math.PI2 / 4);
 
 			  rail.displayHeight = 32;

@@ -10,5 +10,14 @@ export class Node {
 	    public rightControlPoint: ControlPoint,
 	){ 
 		this.vector = new Phaser.Math.Vector2(this.x, this.y) 
+		leftControlPoint.setNode(this);
+		rightControlPoint.setNode(this);
 	};
+
+	reflect(x: number, y: number): [number, number]{
+		return [
+			this.x - (x - this.x), 
+			this.y - (y - this.y)
+		];
+	}
 }

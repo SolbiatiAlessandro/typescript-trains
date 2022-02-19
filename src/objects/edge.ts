@@ -7,8 +7,8 @@ export class Edge extends Phaser.Curves.CubicBezier{
 	constructor(startNode: Node, endNode: Node){
 		super(
 			startNode.vector, 
-			startNode.rightControlPoint._point.vector,
-			endNode.leftControlPoint._point.vector,
+			startNode.rightControlPoint.vector,
+			endNode.leftControlPoint.vector,
 			endNode.vector
 		);
 		this.segments = Math.floor(this.getLength() / this.LENGTH_SEGMENT_RATIO);

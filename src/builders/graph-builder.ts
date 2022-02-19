@@ -7,25 +7,24 @@ import {ControlPoint} from './control-point';
 export class GraphBuilder {
 	graph: Graph = new Graph();
 	private readonly NODE: string = '_node';
-	private readonly controlPointOffsetX = 100;
-	private readonly controlPointOffsetY = -100;
+	private readonly controlPointOffsetX = 80;
+	private readonly controlPointOffsetY = -80;
 	constructor(public scene: MainScene){}
 	
 	createNode(x: number, y: number, name: string){
-		const node = new Node(
-			x,
-			y,
-		    new ControlPoint(
+		const left = new ControlPoint(
 				this.scene, 
 				x - this.controlPointOffsetX, 
 				y - this.controlPointOffsetY
-			),
-		    new ControlPoint(
+			);
+		const right = new ControlPoint(
 				this.scene, 
 				x + this.controlPointOffsetX, 
 				y + this.controlPointOffsetY
-			),
-		);
+			);
+		left.setBrother(right);
+		right.setBrother(left);
+		const node = new Node(x, y, left, right);
 		this._addNode(name, node);
 		return node;
 	}

@@ -10,7 +10,8 @@ export class LoadScene extends Phaser.Scene {
   }
 
   loadAssets(): void {
-	  this.load.image('rail', '../assets/rail.png');
+	  this.load.image('rail-top', '../assets/rail-top.png');
+	  this.load.image('rail-bottom', '../assets/rail-bottom.png');
 	  this.load.image('red', '../assets/red.png');
 	  this.load.image('green', '../assets/green.png');
 	  this.load.image('blue', '../assets/blue.png');
