@@ -34,5 +34,5 @@ Stretch: listen to bach while coding
 Protip: use empty github comments to keep track of new features
 ```
 git commit --allow-empty  (feature ideas descriptions)
-git log --graph --decorate --oneline
+git log --graph --decorate --oneline --all
 ```
