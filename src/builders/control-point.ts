@@ -60,7 +60,6 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 		this.data.get('vector').set(x, y);
 		
 		if(!second){
-			// https://stackoverflow.com/questions/7077651/python-like-unpacking-in-javascript
 			this._brother.onDrag(...this._parentNode.reflect(x, y), true);
 			this._line.setTo(this.x, this.y, this._brother.x, this._brother.y);
 		}
