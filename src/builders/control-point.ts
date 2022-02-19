@@ -1,9 +1,11 @@
 import {Node} from '../objects/node'
 
 export class ControlPoint extends Phaser.GameObjects.Image {
-	_brother: ControlPoint;
-	_parentNode: Node = null;
-	_line: Phaser.GameObjects.Line = null;
+	private _brother: ControlPoint;
+	private _parentNode: Node = null;
+	private _line: Phaser.GameObjects.Line = null;
+	depth: number = 3;
+	scale: number = 0.5;
 	vector: Phaser.Math.Vector2;
 
 	constructor(
@@ -15,7 +17,6 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 		scene.add.existing(this);
 		this.vector = new Phaser.Math.Vector2(this.x, this.y);
 		this.setInteractive();
-		this.setScale(0.5);
 		this.setData('vector', this.vector);
 		this.setData('isControl', true);
 		scene.input.setDraggable(this);
@@ -31,6 +32,15 @@ export class ControlPoint extends Phaser.GameObjects.Image {
    	}
 
 	createLine(): Phaser.GameObjects.Line{
+		let center = this.scene.add.image(
+			(this.x + this._brother.x) / 2,
+			(this.y + this._brother.y) / 2,
+			'controlPointCenter'
+		);
+		center.setDepth(this.depth + 1);
+		center.setScale(this.scale);
+
+
 		this._line = new Phaser.GameObjects.Line(
 			this.scene, 
 			0, 0,
@@ -39,6 +49,7 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 			0xffffff, 0.5
 		);
 		this._line.setOrigin(0, 0);
+		this._line.setDepth(this.depth);
 		this.scene.add.existing(this._line);
 		return this._line;
 	}
@@ -52,7 +63,6 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 			// https://stackoverflow.com/questions/7077651/python-like-unpacking-in-javascript
 			this._brother.onDrag(...this._parentNode.reflect(x, y), true);
 			this._line.setTo(this.x, this.y, this._brother.x, this._brother.y);
-
 		}
 	}
 }

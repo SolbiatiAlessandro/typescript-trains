@@ -8,7 +8,7 @@ export class GraphBuilder {
 	graph: Graph = new Graph();
 	private readonly NODE: string = '_node';
 	private readonly controlPointOffsetX = 80;
-	private readonly controlPointOffsetY = -80;
+	private readonly controlPointOffsetY = 0;
 	constructor(public scene: MainScene){}
 	
 	createNode(x: number, y: number, name: string){
