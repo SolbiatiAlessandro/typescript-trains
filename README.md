@@ -25,8 +25,14 @@
 4. Rewrite everything in small file <100 lines, functional, typed, and tested
 5. Make small commits of every change.
 
-Stretch: listen to bach while coding
-
 ```
 yarn dev
+```
+
+Stretch: listen to bach while coding
+
+Protip: use empty github comments to keep track of new features
+```
+git commit --allow-empty  (feature ideas descriptions)
+git log --graph --decorate --oneline
 ```
