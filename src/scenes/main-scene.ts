@@ -16,34 +16,16 @@ export class MainScene extends Phaser.Scene {
 
   create(): void {
 	  this.railwayBuilder = new RailwayBuilder(this);
-	  this.graphBuilder = new GraphBuilder(this);
+	  this.graphBuilder = new GraphBuilder(this, this.railwayBuilder);
 
 	  this.graphBuilder.createNode( 50, 200, '1');
 	  this.graphBuilder.createNode( 400, 200, '2');
-	  this.railwayBuilder.createRailway(
-		  this.graphBuilder.getNode('1'),
-		  this.graphBuilder.getNode('2'),
-	  );
+	  this.graphBuilder.createEdge( '1', '2');
+	  
 	  this.graphBuilder.createNode( 900, 400, '3');
-	  this.railwayBuilder.createRailway(
-		  this.graphBuilder.getNode('2'),
-		  this.graphBuilder.getNode('3'),
-	  );
+	  this.graphBuilder.createEdge( '2', '3');
 	  this.graphBuilder.createNode( 800, 100, '4');
-	  this.railwayBuilder.createRailway(
-		  this.graphBuilder.getNode('2'),
-		  this.graphBuilder.getNode('4'),
-	  );
-	  /*
-	  this.railwayBuilder.createRailway(
-		  this.graphBuilder.getNode('4'),
-		  this.graphBuilder.getNode('1'),
-	  );
-	  this.railwayBuilder.createRailway(
-		  this.graphBuilder.getNode('3'),
-		  this.graphBuilder.getNode('1'),
-	  );
-	  */
+	  this.graphBuilder.createEdge( '2', '4');
 
 	  this._inputs();
   }

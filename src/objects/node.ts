@@ -8,6 +8,7 @@ export class Node {
 		public y: number,
 	    public leftControlPoint: ControlPoint,
 	    public rightControlPoint: ControlPoint,
+		public name: string
 	){ 
 		this.vector = new Phaser.Math.Vector2(this.x, this.y) 
 		leftControlPoint.setNode(this);
