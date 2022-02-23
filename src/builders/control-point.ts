@@ -6,7 +6,8 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	private _line: Phaser.GameObjects.Line = null;
 	depth: number = 3;
 	scale: number = 0.5;
-	vector: Phaser.Math.Vector2;
+	controlVector: Phaser.Math.Vector2;
+	testVector: Phaser.Math.Vector2;
 
 	constructor(
 		scene: Phaser.Scene,
@@ -15,9 +16,11 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	){ 
 		super(scene, x, y, 'controlPoint');
 		scene.add.existing(this);
-		this.vector = new Phaser.Math.Vector2(this.x, this.y);
 		this.setInteractive();
-		this.setData('vector', this.vector);
+		this.controlVector = new Phaser.Math.Vector2(this.x, this.y);
+		this.testVector = new Phaser.Math.Vector2(this.x, this.y);
+		this.setData('controlVector', this.controlVector);
+		this.setData('testVector', this.testVector);
 		this.setData('isControl', true);
 		scene.input.setDraggable(this);
 	};
@@ -57,7 +60,8 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	onDrag(x: number, y: number, second: boolean = false){
 		this.x = x;
 		this.y = y;
-		this.data.get('vector').set(x, y);
+		this.data.get('controlVector').set(x, y);
+		this.data.get('testVector').set(x, y);
 		
 		if(!second){
 			this._brother.onDrag(...this._parentNode.reflect(x, y), true);

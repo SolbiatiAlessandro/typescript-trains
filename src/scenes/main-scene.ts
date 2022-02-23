@@ -1,6 +1,3 @@
-import {Edge} from '../objects/edge'
-import {Node} from '../objects/node'
-
 import {ControlPoint} from '../builders/control-point'
 import {RailwayBuilder} from '../builders/railway-builder'
 import {GraphBuilder} from '../builders/graph-builder'

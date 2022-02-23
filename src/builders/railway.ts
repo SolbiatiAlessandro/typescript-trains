@@ -1,10 +1,10 @@
-import {Edge} from '../objects/edge';
+import {RenderedEdge} from '../objects/edge';
 import {Node} from '../objects/node';
 import {ControlPoint} from './control-point';
 import {MainScene} from '../scenes/main-scene';
 
 export class Railway{
-	edge: Edge;
+	edge: RenderedEdge;
 	rails: Array<Phaser.GameObjects.Sprite> = []; 
 
 	constructor(
@@ -14,8 +14,8 @@ export class Railway{
 		endNode: Node,
 		image: string
 	){
-	  this.edge = new Edge(startNode, endNode);
-	  this.edge.points().forEach(
+	  this.edge = new RenderedEdge(startNode, endNode);
+	  this.edge.pointsWithTangents().forEach(
 		  ([point, tangent], index) => {
 			  const rail = buildingGroup.getFirstDead(true, point.x, point.y, image);
 			  rail.rotation = Phaser.Math.Angle.Between(0, 0, tangent.x, tangent.y) + (Phaser.Math.PI2 / 4);
@@ -28,7 +28,7 @@ export class Railway{
 	}
 
 	update(buildingGroup: Phaser.GameObjects.Group){
-	  this.edge.points().forEach(
+	  this.edge.pointsWithTangents().forEach(
 		  ([point, tangent], index) => {
 			  const rail = this.rails[index];
 			  rail.x = point.x;
