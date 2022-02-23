@@ -1,6 +1,7 @@
 import {MainScene} from '../scenes/main-scene';
 import {Railway} from '../builders/railway';
 import {Node} from '../objects/node';
+import {Edge} from '../objects/edge';
 import {IRailway} from '../interfaces/IRailway.interface';
 
 
@@ -39,7 +40,8 @@ export class RailwayBuilder {
 			  startNode,
 			  endNode,
 			  'rail-top'
-		  )
+		  ),
+		  testCurve: new Edge(startNode, endNode)
 	  };
 	  this.railways.push(railway);
 	  return railway;
