@@ -7,7 +7,6 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	depth: number = 3;
 	scale: number = 0.5;
 	vector: Phaser.Math.Vector2;
-	_broken: boolean = false;
 
 	constructor(
 		scene: Phaser.Scene,
@@ -57,11 +56,9 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	}
 
 	onDrag(x: number, y: number, second: boolean = false){
-		if (!this._broken){
-			this.x = x;
-			this.y = y;
-			this.data.get('vector').set(x, y);
-		}
+		this.x = x;
+		this.y = y;
+		this.data.get('vector').set(x, y);
 		
 		if(!second){
 			this._brother.onDrag(...this._parentNode.reflect(x, y), true);
