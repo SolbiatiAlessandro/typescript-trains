@@ -41,7 +41,7 @@ export class RailwayBuilder {
 			  endNode,
 			  'rail-top'
 		  ),
-		  testCurve: new Edge(startNode, endNode)
+		  testCurve: new Edge(startNode, endNode, true)
 	  };
 	  this.railways.push(railway);
 	  return railway;
@@ -54,6 +54,7 @@ export class RailwayBuilder {
 			this.railways.forEach(irailway => {
 				irailway.bottomRailway.update(this.topBuildingGroup);
 				irailway.topRailway.update(this.bottomBuildingGroup);
+				irailway.testCurve.points();
 			});
 			this.topBuildingGroup.setDepth(2);
 			this.bottomBuildingGroup.setDepth(1);

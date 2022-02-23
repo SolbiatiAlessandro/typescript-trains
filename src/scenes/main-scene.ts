@@ -32,8 +32,8 @@ export class MainScene extends Phaser.Scene {
 
   _inputs(): void{
 	  this.input.on('drag', function (pointer: any, gameObject: ControlPoint, dragX: number, dragY: number) {
-		  gameObject.onDrag(dragX, dragY);
-	  });
+		  gameObject.onDrag(this.graphBuilder, dragX, dragY);
+	  }.bind(this));
   }
 
   update(): void{

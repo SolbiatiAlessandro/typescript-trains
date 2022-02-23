@@ -1,4 +1,5 @@
 import {Node} from '../objects/node'
+import {GraphBuilder} from '../builders/graph-builder';
 
 export class ControlPoint extends Phaser.GameObjects.Image {
 	private _brother: ControlPoint;
@@ -7,6 +8,7 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	depth: number = 3;
 	scale: number = 0.5;
 	vector: Phaser.Math.Vector2;
+	testVector: Phaser.Math.Vector2;
 
 	constructor(
 		scene: Phaser.Scene,
@@ -16,8 +18,10 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 		super(scene, x, y, 'controlPoint');
 		scene.add.existing(this);
 		this.vector = new Phaser.Math.Vector2(this.x, this.y);
+		this.testVector = new Phaser.Math.Vector2(this.x, this.y);
 		this.setInteractive();
 		this.setData('vector', this.vector);
+		this.setData('testVector', this.testVector);
 		this.setData('isControl', true);
 		scene.input.setDraggable(this);
 	};
@@ -28,9 +32,7 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	} 
 
 	setLine(line: Phaser.GameObjects.Line){ this._line = line; }
-	setBrother(brother: ControlPoint){ 
-		this._brother = brother;
-   	}
+	setBrother(brother: ControlPoint){ this._brother = brother; }
 
 	createLine(): Phaser.GameObjects.Line{
 		let center = this.scene.add.image(
@@ -55,13 +57,22 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 		return this._line;
 	}
 
-	onDrag(x: number, y: number, second: boolean = false){
+	onDrag(graphBuilder: GraphBuilder, x: number, y: number, second: boolean = false){
+		let edges = graphBuilder.getEdges(this._parentNode);
+		if(!edges.some(edge => edge.testCurve.broken)){
+			this.data.get('vector').set(x, y);
+			this.setTint(0xFFFFFF);
+			this._line.setStrokeStyle(0.5, 0xFFFFFF, 1);
+		} else {
+			this.setTint(0xFF0000);
+			this._line.setStrokeStyle(0.5, 0xFF0000, 1);
+		}
 		this.x = x;
 		this.y = y;
-		this.data.get('vector').set(x, y);
+		this.data.get('testVector').set(x, y);
 		
 		if(!second){
-			this._brother.onDrag(...this._parentNode.reflect(x, y), true);
+			this._brother.onDrag(graphBuilder, ...this._parentNode.reflect(x, y), true);
 			this._line.setTo(this.x, this.y, this._brother.x, this._brother.y);
 		}
 	}
