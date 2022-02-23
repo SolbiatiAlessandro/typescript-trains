@@ -1,28 +1,28 @@
-import { LoadScene } from './scenes/load-scene';
-import { MainScene } from './scenes/main-scene';
-import { Constants } from './constants';
+import { LoadScene } from "./scenes/load-scene";
+import { MainScene } from "./scenes/main-scene";
+import { Constants } from "./constants";
 
 export const GameConfig: Phaser.Types.Core.GameConfig = {
-  title: 'Something New',
-  url: 'http://lessand.ro',
-  version: '0.1',
+  title: "Something New",
+  url: "http://lessand.ro",
+  version: "0.1",
   width: Constants.GAME_WINDOW_WIDTH,
   height: Constants.GAME_WINDOW_HEIGHT,
   backgroundColor: 0x3a404d,
   type: Phaser.AUTO,
-  parent: 'game',
+  parent: "game",
   physics: {
-    default: 'arcade',
+    default: "arcade",
     arcade: {
-      gravity: { y: 200 }
-    }
+      gravity: { y: 200 },
+    },
   },
   scene: [LoadScene, MainScene],
   scale: {
-    parent: 'gamediv',
+    parent: "gamediv",
     autoCenter: Phaser.Scale.CENTER_BOTH,
-	mode: Phaser.Scale.FIT,
+    mode: Phaser.Scale.FIT,
     width: Constants.GAME_WINDOW_WIDTH,
-    height: Constants.GAME_WINDOW_HEIGHT
-}
+    height: Constants.GAME_WINDOW_HEIGHT,
+  },
 };
