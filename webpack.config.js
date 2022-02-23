@@ -1,33 +1,33 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './src/game.ts',
+  entry: "./src/game.ts",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        include: path.resolve(__dirname, 'src'),
-        loader: 'ts-loader'
+        include: path.resolve(__dirname, "src"),
+        loader: "ts-loader",
       },
       {
-        test: require.resolve('Phaser'),
-        loader: 'expose-loader',
-        options: { exposes: { globalName: 'Phaser', override: true } }
-      }
-    ]
+        test: require.resolve("Phaser"),
+        loader: "expose-loader",
+        options: { exposes: { globalName: "Phaser", override: true } },
+      },
+    ],
   },
   devServer: {
-    contentBase: path.resolve(__dirname, './'),
-    publicPath: '/dist/',
-    host: 'localhost',
+    contentBase: path.resolve(__dirname, "./"),
+    publicPath: "/dist/",
+    host: "localhost",
     port: 8080,
-    open: false
+    open: false,
   },
   resolve: {
-    extensions: ['.ts', '.js']
-  }
+    extensions: [".ts", ".js"],
+  },
 };

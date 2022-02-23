@@ -1,6 +1,7 @@
 ## Architecture
 
 **src/objects**
+
 - not initialised with scene
 - if they have some painting methods the method accept scene as an argument
 - generally core game logic, not to do with user interactions
@@ -8,14 +9,13 @@
 - **src/objects/edge** is a edge that connect two nodes (stations)
 
 **src/builders**
+
 - **src/objects/railwayBuilder** builds railways, that are edge + rail images
 - accept scene in the constructor
 
 **src/interfaces**
 
 **src/scenes**
-
-
 
 ## Dev Workflow
 
@@ -32,6 +32,7 @@ yarn dev
 Stretch: listen to bach while coding
 
 Protip: use empty github comments to keep track of new features
+
 ```
 git commit --allow-empty  (feature ideas descriptions)
 git log --graph --decorate --oneline --all
