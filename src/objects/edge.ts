@@ -18,6 +18,14 @@ export class Edge extends Phaser.Curves.CubicBezier{
 		);
 		console.log(this.testCurve);
 		this.segments = Math.floor(this.getLength() / this.LENGTH_SEGMENT_RATIO);
+		this.breakingEmitter = new Phaser.Events.EventEmitter();
+	}
+
+	_emitBreakingDistance(firstPoint: Phaser.Math.Vector2, secondPoint: Phaser.Math.Vector2): Phaser.Math.Vector2 {
+		if(Phaser.Math.Distance.BetweenPoints(firstPoint, secondPoint) > this.BREAKING_DISTANCE){
+			this.breakingEmitter.emit(this.BREAKING_DISTANCE_EVENT);
+		}
+		return secondPoint;
 	}
 
 	_emitBreakingDistance(firstPoint: Phaser.Math.Vector2, secondPoint: Phaser.Math.Vector2): Phaser.Math.Vector2 {
