@@ -1,4 +1,5 @@
 import {Node} from '../objects/node'
+import {GraphBuilder} from '../builders/graph-builder'
 
 export class ControlPoint extends Phaser.GameObjects.Image {
 	private _brother: ControlPoint;
@@ -8,6 +9,9 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 	scale: number = 0.5;
 	controlVector: Phaser.Math.Vector2;
 	testVector: Phaser.Math.Vector2;
+
+	private readonly ERROR_COLOR = 0xFF0000;
+	private readonly OK_COLOR = 0xFFFFFF;
 
 	constructor(
 		scene: Phaser.Scene,
@@ -49,7 +53,7 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 			0, 0,
 			this.x, this.y,
 			this._brother.x, this._brother.y,
-			0xffffff, 0.5
+			this.OK_COLOR, 0.5
 		);
 		this._line.setOrigin(0, 0);
 		this._line.setDepth(this.depth);
@@ -57,14 +61,22 @@ export class ControlPoint extends Phaser.GameObjects.Image {
 		return this._line;
 	}
 
-	onDrag(x: number, y: number, second: boolean = false){
+	onDrag(graphBuilder: GraphBuilder, x: number, y: number, second: boolean = false){
+		const edges = graphBuilder.getEdges(this._parentNode);
+		if(!edges.some(edge => edge.testRailway.broken)){
+			this.data.get('controlVector').set(x, y);
+			this.setTint(this.OK_COLOR);
+			this._line.setStrokeStyle(0.5, this.OK_COLOR, 1);
+		} else {
+			this.setTint(this.ERROR_COLOR);
+			this._line.setStrokeStyle(0.5, this.ERROR_COLOR, 1);
+		}
 		this.x = x;
 		this.y = y;
-		this.data.get('controlVector').set(x, y);
 		this.data.get('testVector').set(x, y);
 		
 		if(!second){
-			this._brother.onDrag(...this._parentNode.reflect(x, y), true);
+			this._brother.onDrag(graphBuilder, ...this._parentNode.reflect(x, y), true);
 			this._line.setTo(this.x, this.y, this._brother.x, this._brother.y);
 		}
 	}
