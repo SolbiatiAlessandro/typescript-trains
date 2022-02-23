@@ -32,6 +32,7 @@ class Edge extends Phaser.Curves.CubicBezier {
 	}
 }
 
+// this is the curve used to render railways images
 class RenderedEdge extends Edge{
 	constructor(startNode: Node, endNode: Node){
 		super(
@@ -53,6 +54,7 @@ class RenderedEdge extends Edge{
 	}
 }
 
+// this is the curve used to test if we have an acceptable curve state after a user edit
 class TestEdge extends Edge{
 	broken: boolean = false;
 	private readonly BREAKING_DISTANCE_MAX: number = 23;

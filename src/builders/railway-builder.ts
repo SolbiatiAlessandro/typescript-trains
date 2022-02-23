@@ -1,6 +1,7 @@
 import {MainScene} from '../scenes/main-scene';
 import {Railway} from '../builders/railway';
 import {Node} from '../objects/node';
+import {TestEdge} from '../objects/edge';
 import {IRailway} from '../interfaces/IRailway.interface';
 
 
@@ -39,7 +40,8 @@ export class RailwayBuilder {
 			  startNode,
 			  endNode,
 			  'rail-top'
-		  )
+		  ),
+		  testRailway: new TestEdge(startNode, endNode)
 	  };
 	  this.railways.push(railway);
 	  return railway;
@@ -52,6 +54,7 @@ export class RailwayBuilder {
 			this.railways.forEach(irailway => {
 				irailway.bottomRailway.update(this.topBuildingGroup);
 				irailway.topRailway.update(this.bottomBuildingGroup);
+				irailway.testRailway.update();
 			});
 			this.topBuildingGroup.setDepth(2);
 			this.bottomBuildingGroup.setDepth(1);
