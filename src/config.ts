@@ -8,7 +8,7 @@ export const GameConfig: Phaser.Types.Core.GameConfig = {
   version: "0.1",
   width: Constants.GAME_WINDOW_WIDTH,
   height: Constants.GAME_WINDOW_HEIGHT,
-  backgroundColor: 0x3a404d,
+  backgroundColor: Constants.BACKGROUND_COLOR,
   type: Phaser.AUTO,
   parent: "game",
   physics: {

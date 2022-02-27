@@ -2,6 +2,7 @@ import { MainScene } from "../scenes/main-scene";
 import { Railway } from "../builders/railway";
 import { Node } from "../objects/node";
 import { TestEdge } from "../objects/edge";
+import { Constants } from "../constants";
 import { IRailway } from "../interfaces/IRailway.interface";
 
 export class RailwayBuilder {
@@ -36,7 +37,8 @@ export class RailwayBuilder {
         this.topBuildingGroup,
         startNode,
         endNode,
-        "rail-top"
+        "rail-top",
+		Constants.HIGHLIGHT_COLORS[Math.floor(Math.random() * Constants.HIGHLIGHT_COLORS.length)]
       ),
       testRailway: new TestEdge(startNode, endNode),
     };

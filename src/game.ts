@@ -8,5 +8,8 @@ export class Game extends Phaser.Game {
 }
 
 window.addEventListener("load", () => {
+  const body: any = document.getElementById('gamebody');
+  body.style.backgroundColor = "#" + GameConfig.backgroundColor.toString(16);
+
   const game = new Game(GameConfig);
 });

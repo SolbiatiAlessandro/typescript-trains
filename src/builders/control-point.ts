@@ -1,17 +1,18 @@
 import { Node } from "../objects/node";
 import { GraphBuilder } from "../builders/graph-builder";
+import { Constants } from "../constants";
 
 export class ControlPoint extends Phaser.GameObjects.Image {
   private _brother: ControlPoint;
   private _parentNode: Node = null;
   private _line: Phaser.GameObjects.Line = null;
   depth: number = 3;
-  scale: number = 0.5;
+  scale: number = 0.6;
   controlVector: Phaser.Math.Vector2;
   testVector: Phaser.Math.Vector2;
 
-  private readonly ERROR_COLOR = 0xff0000;
-  private readonly OK_COLOR = 0xffffff;
+  private readonly ERROR_COLOR = Constants.ERROR_COLOR;
+  private readonly OK_COLOR = Constants.SECONDARY_COLOR;
 
   constructor(
     scene: Phaser.Scene,
@@ -27,6 +28,7 @@ export class ControlPoint extends Phaser.GameObjects.Image {
     this.setData("testVector", this.testVector);
     this.setData("isControl", true);
     scene.input.setDraggable(this);
+	this.tint = this.OK_COLOR;
   }
 
   setNode(node: Node) {
@@ -46,8 +48,8 @@ export class ControlPoint extends Phaser.GameObjects.Image {
       (this.y + this._brother.y) / 2,
       "controlPointCenter"
     );
-    center.setDepth(this.depth + 1);
-    center.setScale(this.scale);
+    center.setDepth(this.depth + 2);
+    center.setScale(this.scale * 1.5);
 
     this._line = new Phaser.GameObjects.Line(
       this.scene,
