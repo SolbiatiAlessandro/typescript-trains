@@ -24,15 +24,19 @@ export class RailwayBuilder {
   }
 
   createRailway(startNode: Node, endNode: Node) {
+	  let key = startNode.name + endNode.name;
     let railway: IRailway = {
+	  key: key,
       bottomRailway: new Railway(
+		key,
         this.scene,
         this.bottomBuildingGroup,
         startNode,
         endNode,
-        "rail-bottom"
+        "rail-bottom",
       ),
       topRailway: new Railway(
+		key,
         this.scene,
         this.topBuildingGroup,
         startNode,

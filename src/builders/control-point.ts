@@ -6,6 +6,7 @@ export class ControlPoint extends Phaser.GameObjects.Image {
   private _brother: ControlPoint;
   private _parentNode: Node = null;
   private _line: Phaser.GameObjects.Line = null;
+  private _center: Phaser.GameObjects.Image = null;
   depth: number = 3;
   scale: number = 0.6;
   controlVector: Phaser.Math.Vector2;
@@ -42,14 +43,24 @@ export class ControlPoint extends Phaser.GameObjects.Image {
     this._brother = brother;
   }
 
+  display(show: boolean = true){
+	  if(this._center){
+		  this._center.visible = show;
+	  }
+	  if(this._line){
+		  this._line.visible = show;
+	  }
+	  this.visible = show;
+  }
+
   createLine(): Phaser.GameObjects.Line {
-    let center = this.scene.add.image(
+    this._center = this.scene.add.image(
       (this.x + this._brother.x) / 2,
       (this.y + this._brother.y) / 2,
       "controlPointCenter"
     );
-    center.setDepth(this.depth + 2);
-    center.setScale(this.scale * 1.5);
+    this._center.setDepth(this.depth + 2);
+    this._center.setScale(this.scale * 1.5);
 
     this._line = new Phaser.GameObjects.Line(
       this.scene,
