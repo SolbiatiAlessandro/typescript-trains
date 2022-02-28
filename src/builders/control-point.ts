@@ -28,7 +28,7 @@ export class ControlPoint extends Phaser.GameObjects.Image {
     this.setData("testVector", this.testVector);
     this.setData("isControl", true);
     scene.input.setDraggable(this);
-	this.tint = this.OK_COLOR;
+    this.tint = this.OK_COLOR;
   }
 
   setNode(node: Node) {

@@ -38,7 +38,9 @@ export class RailwayBuilder {
         startNode,
         endNode,
         "rail-top",
-		Constants.HIGHLIGHT_COLORS[Math.floor(Math.random() * Constants.HIGHLIGHT_COLORS.length)]
+        Constants.HIGHLIGHT_COLORS[
+          Math.floor(Math.random() * Constants.HIGHLIGHT_COLORS.length)
+        ]
       ),
       testRailway: new TestEdge(startNode, endNode),
     };

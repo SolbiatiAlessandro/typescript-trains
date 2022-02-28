@@ -14,12 +14,12 @@ export class Railway {
     startNode: Node,
     endNode: Node,
     image: string,
-	tint: number = Constants.PRIMARY_COLOR, 
+    tint: number = Constants.PRIMARY_COLOR
   ) {
     this.edge = new RenderedEdge(startNode, endNode);
     this.edge.pointsWithTangents().forEach(([point, tangent], index) => {
       const rail = buildingGroup.getFirstDead(true, point.x, point.y, image);
-	  rail.setTint(tint);
+      rail.setTint(tint);
       rail.rotation =
         Phaser.Math.Angle.Between(0, 0, tangent.x, tangent.y) +
         Phaser.Math.PI2 / 4;
