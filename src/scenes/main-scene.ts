@@ -1,18 +1,30 @@
 import { ControlPoint } from "../builders/control-point";
 import { RailwayBuilder } from "../builders/railway-builder";
 import { GraphBuilder } from "../builders/graph-builder";
+import { GraphEvents } from "../events/graph-events";
 
 export class MainScene extends Phaser.Scene {
-  railwayBuilder: RailwayBuilder;
-  graphBuilder: GraphBuilder;
+
 
   constructor() {
     super({ key: "MainScene" });
   }
 
-  create(): void {
+  railwayBuilder: RailwayBuilder;
+  graphBuilder: GraphBuilder;
+  initBuilders(){
     this.railwayBuilder = new RailwayBuilder(this);
     this.graphBuilder = new GraphBuilder(this, this.railwayBuilder);
+  }
+
+  graphEvents: GraphEvents;
+  initEvents(){
+	this.graphEvents = new GraphEvents();
+  }
+
+  create(): void {
+	this.initBuilders();
+	this.initEvents();
 
     this.graphBuilder.createNode(50, 200, "1");
     this.graphBuilder.createNode(400, 200, "2");
