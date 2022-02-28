@@ -1,6 +1,6 @@
 import { Railway } from '../builders/railway'
 export class Player {
-	public selected: Railway;
+	public selected: Railway = null;
 
 	constructor(){};
 }

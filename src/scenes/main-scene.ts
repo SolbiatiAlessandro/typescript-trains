@@ -43,6 +43,15 @@ export class MainScene extends Phaser.Scene {
         gameObject.onDrag(this.graphBuilder, dragX, dragY);
       }.bind(this)
     );
+
+	this.input.on(
+		"pointerdown",
+		function(pointer: any, currentlyOver: Array<Phaser.GameObjects.GameObject>){
+			if (currentlyOver.length  == 0){
+				this.graphSelection.deselectCurrentEdge();
+			}
+		}.bind(this)
+	);
   }
 
   update(): void {
