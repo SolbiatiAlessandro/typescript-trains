@@ -22,8 +22,13 @@ export class Railway {
       const rail = buildingGroup.getFirstDead(true, point.x, point.y, image);
 	  rail.setInteractive();
 	  rail.on("pointerdown", function(pointer: any){
-		  console.log("click");
 		  this.scene.graphSelection.selectEdge(this);
+	  }.bind(this));
+	  rail.on("pointerover", function(pointer: any){
+		  this.scene.graphSelection.hoverEdge(this);
+	  }.bind(this));
+	  rail.on("pointerout", function(pointer: any){
+		  this.scene.graphSelection.hoverEdgeOut(this);
 	  }.bind(this));
 	  rail.setTint(tint);
       rail.rotation =

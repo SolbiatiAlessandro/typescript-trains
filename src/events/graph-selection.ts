@@ -4,8 +4,11 @@ import { IRailway } from '../interfaces/irailway.interface';
 import { Node } from '../objects/node';
 
 export class GraphSelection extends Phaser.Events.EventEmitter{
+	private readonly HOVEROUT_EDGE_EVENT: string = "_HOVEROUT_EDGE";
+	private readonly HOVER_EDGE_EVENT: string = "_HOVER_EDGE";
 	private readonly SELECT_EDGE_EVENT: string = "_SELECT_EDGE";
 	private readonly DESELECT_EDGE_EVENT: string = "_DESELECT_EDGE";
+	//
 	//graphBuilder not public, can't be accessed by railway
 	constructor(public graphBuilder: GraphBuilder){
 		super();
@@ -27,6 +30,14 @@ export class GraphSelection extends Phaser.Events.EventEmitter{
 			let irailway: IRailway = this.getEdgeAttribute(railway.key);
 			irailway.shadowRailway.buildingGroup.setVisible(false);
 		}, graphBuilder)
+		this.on(this.HOVER_EDGE_EVENT, function(railway: Railway){
+			let irailway: IRailway = this.getEdgeAttribute(railway.key);
+			irailway.shadowRailway.buildingGroup.setVisible(true);
+		}, graphBuilder)
+		this.on(this.HOVEROUT_EDGE_EVENT, function(railway: Railway){
+			let irailway: IRailway = this.getEdgeAttribute(railway.key);
+			irailway.shadowRailway.buildingGroup.setVisible(false);
+		}, graphBuilder)
 	}
 
 	deselectCurrentEdge(){
@@ -37,5 +48,16 @@ export class GraphSelection extends Phaser.Events.EventEmitter{
 
 	selectEdge(railway: Railway){
 		this.emit(this.SELECT_EDGE_EVENT, railway);
+	}
+
+	hoverEdge(railway: Railway){
+		this.emit(this.HOVER_EDGE_EVENT, railway);
+	}
+
+	hoverEdgeOut(railway: Railway){
+		if(this.graphBuilder.scene.player.selected == null ||
+		   this.graphBuilder.scene.player.selected.key != railway.key){
+			this.emit(this.HOVEROUT_EDGE_EVENT, railway);
+		}
 	}
 }
