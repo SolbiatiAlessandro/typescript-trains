@@ -1,5 +1,6 @@
 import { GraphBuilder } from '../builders/graph-builder';
 import { Railway } from '../builders/railway';
+import { IRailway } from '../interfaces/irailway.interface';
 import { Node } from '../objects/node';
 
 export class GraphSelection extends Phaser.Events.EventEmitter{
@@ -13,12 +14,18 @@ export class GraphSelection extends Phaser.Events.EventEmitter{
 			this.scene.player.selected = railway;
 			let nodes: Array<Node> = this.getNodesFromEdge(railway.key);
 			nodes.forEach(node => node.display(true));
+
+			let irailway: IRailway = this.getEdgeAttribute(railway.key);
+			irailway.shadowRailway.buildingGroup.setVisible(true);
 		}, graphBuilder)
 		this.on(this.DESELECT_EDGE_EVENT, function(railway: Railway){
 			// make node appear
 			this.scene.player.selected = null;
 			let nodes: Array<Node> = this.getNodesFromEdge(railway.key);
 			nodes.forEach(node => node.display(false));
+
+			let irailway: IRailway = this.getEdgeAttribute(railway.key);
+			irailway.shadowRailway.buildingGroup.setVisible(false);
 		}, graphBuilder)
 	}
 

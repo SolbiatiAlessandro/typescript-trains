@@ -9,6 +9,7 @@ export class RailwayBuilder {
   railways: Array<IRailway> = [];
 
   // distinction between top and bottom is for rail intersection to look realistic
+  shadowBuildingGroups: Array<Phaser.GameObjects.Group> = []; // for iron bars in rail
   topBuildingGroup: Phaser.GameObjects.Group; // for iron bars in rail
   bottomBuildingGroup: Phaser.GameObjects.Group; // for wooden planks in rail
 
@@ -25,8 +26,18 @@ export class RailwayBuilder {
 
   createRailway(startNode: Node, endNode: Node) {
 	  let key = startNode.name + endNode.name;
+	  let shadowBuildingGroup = new Phaser.GameObjects.Group(this.scene);
+	  this.shadowBuildingGroups.push(shadowBuildingGroup);
     let railway: IRailway = {
 	  key: key,
+	  shadowRailway: new Railway(
+		key,
+        this.scene,
+        shadowBuildingGroup,
+        startNode,
+        endNode,
+        "rail-bottom-shadow",
+	  ),
       bottomRailway: new Railway(
 		key,
         this.scene,
@@ -47,6 +58,7 @@ export class RailwayBuilder {
       testRailway: new TestEdge(startNode, endNode),
     };
     this.railways.push(railway);
+	shadowBuildingGroup.setVisible(false);
     return railway;
   }
 
@@ -57,6 +69,7 @@ export class RailwayBuilder {
       this.railways.forEach((irailway) => {
         irailway.bottomRailway.update(this.topBuildingGroup);
         irailway.topRailway.update(this.bottomBuildingGroup);
+        irailway.shadowRailway.update(irailway.shadowRailway.buildingGroup);
         irailway.testRailway.update();
       });
       this.topBuildingGroup.setDepth(2);

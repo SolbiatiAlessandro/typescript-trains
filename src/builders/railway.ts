@@ -11,7 +11,7 @@ export class Railway {
   constructor(
 	public key: string,
     public scene: MainScene,
-    buildingGroup: Phaser.GameObjects.Group,
+    public buildingGroup: Phaser.GameObjects.Group,
     startNode: Node,
     endNode: Node,
     image: string,

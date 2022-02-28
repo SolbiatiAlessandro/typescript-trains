@@ -81,4 +81,8 @@ export class GraphBuilder {
   getNode(name: string): Node | null {
     return this.graph.getNodeAttribute(name, this.NODE);
   }
+
+  getEdgeAttribute(edgeKey: string): IRailway {
+	  return this.graph.getEdgeAttribute(edgeKey, this.EDGE);
+  }
 }
